@@ -6,4 +6,6 @@ $shoppingList = [
     "Яйца"
 ];
 echo "<br>Исходный список покупок:\n";
-print_r($shoppingList);
+foreach($shoppingList as $product){
+    echo $product;
+}
