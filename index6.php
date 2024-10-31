@@ -1,4 +1,5 @@
 <?php
+
 rand = random_int(1, 6);
 
 $myArray = [
