@@ -26,14 +26,17 @@ $shoppingList = [
     
 ];
 
-$key = array_search("Хлеб", $shoppingList);
+$key = array_search('Хлеб', $shoppingList);
+
 if ($key !== false) {
     unset($shoppingList[$key]);
 }
 echo "Список покупок:\n";
+
 foreach ($shoppingList as $item) {
     echo "- $item\n";
-}        
+} 
+       
 // Выводит обновленный список покупок.
 $shoppingList = [
     'Молоко',
@@ -42,10 +45,13 @@ $shoppingList = [
     'Масло'
 ];
 $key = array_search("Хлеб", $shoppingList);
+
 if ($key !== false) {
     unset($shoppingList[$key]);
 }    
+
 echo "Обновленный список покупок:\n";
+
 foreach ($shoppingList as $item) {
     echo "- $item\n";
 }

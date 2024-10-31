@@ -4,6 +4,7 @@
 function getLargestElementFromArray(array $intArray): int
 {
     $memory = 0;
+    
    foreach ($intArray as $value) {
         if ($memory < $value) {
             $memory = $value;
