@@ -15,6 +15,7 @@
         <th>Дата создания</th>
         <th>Дедлайн</th>
         <th>Статус</th>
+        <th>Действия</th>
     </tr>
     <?php
     $json = file_get_contents('./db.json');
@@ -22,12 +23,40 @@
     
     foreach ($tasks as $task){
     echo '<tr>';
-    echo $task["title"];
+    echo "<td>{$task['number']} </td>";
+    echo "<td>{$task['title']} </td>";
+    echo "<td>{$task['creationDate']} </td>";
+    echo "<td>{$task['deadline']} </td>";
+    echo "<td>{$task['status']} </td>";
+    echo "<td><button onClick='deleteTask({$task['number']})'>Удалить</button></td>";
     echo '</tr>';
     }
     
-    // todo вывести список задач из базы сделать красивый список
     ?>
 </table>
+<script>
+    function deleteTask(taskId){
+        if (confirm('Вы уверены, что хотите удалить эту задачу?')) {
+            fetch('index.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: 'taskId=' + taskId
+            })
+            .then(response => response.text())
+            .then(data => {
+                if (data === 'success') {
+                    alert('Задача успешно удалена');
+                    location.reload(); // Обновляем страницу
+                } else {
+                    alert('Ошибка при удалении задачи');
+                }
+            });
+        }
+    }
+</script>
 </body>
 </html>
+
+
