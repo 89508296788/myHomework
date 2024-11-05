@@ -8,7 +8,8 @@
 </head>
 <body>
   <h3>Мои задачи</h3> 
-  <table>
+  <button onClick='addTask()'>Добавить новую задачу</button>
+  <table> 
     <tr>
         <th>№</th>
         <th>Название</th>
@@ -37,12 +38,9 @@
 <script>
     function deleteTask(taskId){
         if (confirm('Вы уверены, что хотите удалить эту задачу?')) {
-            fetch('index.php', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                },
-                body: 'taskId=' + taskId
+            fetch('/todolist/delete.php?taskId='+taskId, {
+                method:'POST', 
+            
             })
             .then(response => response.text())
             .then(data => {
@@ -55,6 +53,11 @@
             });
         }
     }
+
+    function addTask(){ 
+        location.replace('/todolist/add.php')
+
+    };
 </script>
 </body>
 </html>

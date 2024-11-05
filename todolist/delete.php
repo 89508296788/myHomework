@@ -1,4 +1,5 @@
 <?php
+//die('Привет'); // обрывает выполнение кода.
 // TODO Реализовать алгоритм удаления задачи из db.json по ее number, используя суперглобальную переменную $_REQUEST.
 // Почитать что таклое супер глобальные переменные.
 // Реализовать запрос к этой странице из функции deleteTask используя нейронку. <?php
@@ -18,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_REQUEST['taskId'])) {
     }
 
     // Сохраняем обновленный список задач обратно в db.json
-    file_put_contents('./db.json', json_encode(array_values($tasks)));
+    file_put_contents('./db.json', json_encode(array_values($tasks), JSON_PRETTY_PRINT));
 
     // Возвращаем успешный ответ
     echo 'success';
