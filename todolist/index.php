@@ -30,6 +30,7 @@
     echo "<td>{$task['deadline']} </td>";
     echo "<td>{$task['status']} </td>";
     echo "<td><button onClick='deleteTask({$task['number']})'>Удалить</button></td>";
+    echo "<td><button onClick='editTask({$task['number']})'>Редактировать задачу</button></td>";
     echo '</tr>';
     }
     

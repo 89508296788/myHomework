@@ -17,7 +17,7 @@ function getLastTaskId(): int
 function saveTask(array $task): void 
 {
     $json = file_get_contents('./db.json');// данные из файла
-    $tasks = json_decode($json, true); // жанные превращаем в массив
+    $tasks = json_decode($json, true); // данные превращаем в массив
     $tasks[]=$task;// к массиву задач добавляем новые данные
     $encodedTasks = json_encode($tasks, JSON_PRETTY_PRINT);// массив задач снова кодируем в json строку
     file_put_contents('./db.json',  $encodedTasks);// снова сохраняем файл
