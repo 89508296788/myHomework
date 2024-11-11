@@ -17,6 +17,7 @@
         <th>Дедлайн</th>
         <th>Статус</th>
         <th>Действия</th>
+        <th>Редактирование</th>
     </tr>
     <?php
     $json = file_get_contents('./db.json');
@@ -59,6 +60,10 @@
         location.replace('/todolist/add.php')
 
     };
+    function editTask(taskId) {
+        
+    location.replace('/todolist/edit.php?taskId=' + taskId);
+};
 </script>
 </body>
 </html>
