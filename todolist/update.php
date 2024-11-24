@@ -1,6 +1,4 @@
 <?php
-// update.php
-
 // Получаем данные из формы
 $taskId = $_POST['taskId'];
 $title = $_POST['title'];
@@ -8,11 +6,11 @@ $creationDate = $_POST['creationDate'];
 $deadline = $_POST['deadline'];
 $status = $_POST['status'];
 
-// Читаем данные из JSON файла
+// Загружаем данные из db.json
 $json = file_get_contents('./db.json');
 $tasks = json_decode($json, true);
 
-// Обновляем задачу
+// Находим задачу по идентификатору и обновляем её данные
 foreach ($tasks as &$task) {
     if ($task['number'] == $taskId) {
         $task['title'] = $title;
@@ -23,7 +21,7 @@ foreach ($tasks as &$task) {
     }
 }
 
-// Сохраняем обновленные данные обратно в JSON файл
+// Сохраняем обновленные данные обратно в db.json
 file_put_contents('./db.json', json_encode($tasks, JSON_PRETTY_PRINT));
 
 // Перенаправляем пользователя на главную страницу
