@@ -1,5 +1,5 @@
 <?php
-require_once './connection.php';
+require_once './db/connection.php';
 
 /**
  * Отвечает за операции сущностью task.
@@ -60,4 +60,3 @@ class TaskRepository
     }
 
 }
-

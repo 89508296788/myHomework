@@ -1,5 +1,8 @@
 <?php
-include 'db.php';
+include_once './db/taskRepository.php';
+
+$repository = new TaskRepository();
+$task = $repository->addTask();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $newTask = [
