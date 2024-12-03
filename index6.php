@@ -9,46 +9,62 @@ $array = [
 echo $array[0]['title'];
 echo $array[1]['title'];
  
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <link href="/todolist/styles.css" rel="stylesheet">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Todolist</title>
-</head>
-<body>
-  <h3>Мои задачи</h3> 
-  <table>
-    <tr>
-        <th>№</th>
-        <th>Название</th>
-        <th>Дата создания</th>
-        <th>Дедлайн</th>
-        <th>Статус</th>
-        <th>Действия</th>
-    </tr>
-    <?php
-    $json = file_get_contents('./db.json');
-    $tasks = json_decode($json, true);
-    
-    foreach ($tasks as $task){
-    echo '<tr>';
-    echo "<td>{$task['number']} </td>";
-    echo "<td>{$task['title']} </td>";
-    echo "<td>{$task['creationDate']} </td>";
-    echo "<td>{$task['deadline']} </td>";
-    echo "<td>{$task['status']} </td>";
-    echo "<td><button onClick='deleteTask({$task['number']})'>Удалить</button></td>";
-    echo '</tr>';
+
+
+
+<?php
+function connectDB() {
+    $db = new SQLite3('todolist.db');
+    return $db;
+}
+
+function getAllTasks() {
+    $db = connectDB();
+    $result = $db->query('SELECT * FROM tasks');
+    $tasks = [];
+    while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
+        $tasks[] = $row;
     }
-    
-    ?>
-</table>
-<script>
-    function deleteTask(taskId){
-        console.log('я тут' + taskId);
-    }
-</script>
-</body>
-</html>
+    $db->close();
+    return $tasks;
+}
+
+function addTask($task) {
+    $db = connectDB();
+    $stmt = $db->prepare('INSERT INTO tasks (title, creationDate, deadline, status) VALUES (:title, :creationDate, :deadline, :status)');
+    $stmt->bindValue(':title', $task['title'], SQLITE3_TEXT);
+    $stmt->bindValue(':creationDate', $task['creationDate'], SQLITE3_TEXT);
+    $stmt->bindValue(':deadline', $task['deadline'], SQLITE3_TEXT);
+    $stmt->bindValue(':status', $task['status'], SQLITE3_TEXT);
+    $stmt->execute();
+    $db->close();
+}
+
+function updateTask($task) {
+    $db = connectDB();
+    $stmt = $db->prepare('UPDATE tasks SET title = :title, creationDate = :creationDate, deadline = :deadline, status = :status WHERE id = :id');
+    $stmt->bindValue(':title', $task['title'], SQLITE3_TEXT);
+    $stmt->bindValue(':creationDate', $task['creationDate'], SQLITE3_TEXT);
+    $stmt->bindValue(':deadline', $task['deadline'], SQLITE3_TEXT);
+    $stmt->bindValue(':status', $task['status'], SQLITE3_TEXT);
+    $stmt->bindValue(':id', $task['id'], SQLITE3_INTEGER);
+    $stmt->execute();
+    $db->close();
+}
+
+function deleteTask($taskId) {
+    $db = connectDB();
+    $stmt = $db->prepare('DELETE FROM tasks WHERE id = :id');
+    $stmt->bindValue(':id', $taskId, SQLITE3_INTEGER);
+    $stmt->execute();
+    $db->close();
+}
+?>
+
+CREATE TABLE tasks (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    title TEXT NOT NULL,
+    creationDate TEXT NOT NULL,
+    deadline TEXT NOT NULL,
+    status TEXT NOT NULL
+);

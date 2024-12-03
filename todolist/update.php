@@ -1,4 +1,9 @@
 <?php
+require_once './db/taskRepository.php';
+
+$repository = new TaskRepository();
+
+
 // Получаем данные из формы
 $taskId = $_POST['taskId'];
 $title = $_POST['title'];
@@ -6,23 +11,14 @@ $creationDate = $_POST['creationDate'];
 $deadline = $_POST['deadline'];
 $status = $_POST['status'];
 
-// Загружаем данные из db.json
-$json = file_get_contents('./db.json');
-$tasks = json_decode($json, true);
 
-// Находим задачу по идентификатору и обновляем её данные
-foreach ($tasks as &$task) {
-    if ($task['number'] == $taskId) {
-        $task['title'] = $title;
-        $task['creationDate'] = $creationDate;
-        $task['deadline'] = $deadline;
-        $task['status'] = $status;
-        break;
-    }
-}
+$taskForUpdate = $repository->getById($taskId);
 
-// Сохраняем обновленные данные обратно в db.json
-file_put_contents('./db.json', json_encode($tasks, JSON_PRETTY_PRINT));
+$taskForUpdate['title'] = $title;
+$taskForUpdate['creationDate'] = $creationDate;
+$taskForUpdate['deadline'] = $deadline;
+$taskForUpdate['status'] = $status;
+$repository->updateTask($taskForUpdate);
 
 // Перенаправляем пользователя на главную страницу
 header('Location: /todolist/index.php');

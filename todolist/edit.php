@@ -1,5 +1,10 @@
 <?php
-include 'db.php';
+require_once './db/taskRepository.php';
+
+function updateTask(array $updatedTask): void
+{
+
+}
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $updatedTask = [
@@ -9,13 +14,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         "deadline" => $_POST['deadline'],
         "status" => $_POST['status'],
     ];
-    updateTask($updatedTask);
     header('Location: /todolist/index.php');
     exit();
 }
 
 $taskId = $_GET['taskId'];
-$db = connectDB();
+$db = connectDB("./data.db");
 $stmt = $db->prepare('SELECT * FROM tasks WHERE id = :id');
 $stmt->bindValue(':id', $taskId, SQLITE3_INTEGER);
 $result = $stmt->execute();

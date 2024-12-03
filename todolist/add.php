@@ -1,17 +1,22 @@
 <?php
+
 include_once './db/taskRepository.php';
 
-$repository = new TaskRepository();
-$task = $repository->addTask();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $repository = new TaskRepository();
+
     $newTask = [
         "title" => $_POST['title'],
         "creationDate" => $_POST['creationDate'],
         "deadline" => $_POST['deadline'],
         "status" => $_POST['status'],
     ];
-    addTask($newTask);
+
+    // Добавляем задачу через репозиторий
+    $repository->addTask($newTask);
+
+    // Перенаправляем пользователя на главную страницу
     header('Location: /todolist/index.php');
     exit();
 }

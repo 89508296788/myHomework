@@ -3,7 +3,7 @@
 include './db/taskRepository.php';
 
 $repository = new TaskRepository();
-$tasks = $repository->getAllTasks();// запустить код в репозитории. отладка кода.
+$tasks = $repository->getAllTasks();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -75,4 +75,3 @@ $tasks = $repository->getAllTasks();// запустить код в репози
 </script>
 </body>
 </html>
- // Доделать SQlite с json. Ознакомиться с константами ютуб. пересмотри видосы.
