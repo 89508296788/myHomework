@@ -1,17 +1,11 @@
 <?php
 require_once './db/connection.php';
 
-/**
- * Отвечает за операции сущностью task.
- * ctrl+alt+l выравнивание кода на странице.
- * include чем отличается
- */
 class TaskRepository
 {
     /**
      * Возвращает массив задач из базы данных
      * @return array
-     *
      */
     public function getAllTasks(): array
     {
@@ -52,19 +46,21 @@ class TaskRepository
 
     public function deleteTask($taskId)
     {
-        $db = connectDB();
+        $db = connectDB("./data.db");
         $stmt = $db->prepare('DELETE FROM tasks WHERE id = :id');
         $stmt->bindValue(':id', $taskId, SQLITE3_INTEGER);
         $stmt->execute();
         $db->close();
     }
 
-    public function getById(int $taskId): array
+    public function getById(int $taskId): ?array
     {
         $db = connectDB("./data.db");
-        $stmt = $db->prepare('SELECTE FROM tasks WHERE id = :id');
+        $stmt = $db->prepare('SELECT * FROM tasks WHERE id = :id');
         $stmt->bindValue(':id', $taskId, SQLITE3_INTEGER);
-        $stmt->execute();
+        $result = $stmt->execute();
+        $task = $result->fetchArray(SQLITE3_ASSOC);
         $db->close();
+        return $task ? $task : null;
     }
 }

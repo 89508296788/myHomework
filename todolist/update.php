@@ -23,4 +23,3 @@ $repository->updateTask($taskForUpdate);
 // Перенаправляем пользователя на главную страницу
 header('Location: /todolist/index.php');
 exit();
-?>

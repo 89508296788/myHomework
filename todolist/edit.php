@@ -3,28 +3,26 @@ require_once './db/taskRepository.php';
 
 function updateTask(array $updatedTask): void
 {
-
+    $repository = new TaskRepository();
+    $repository->updateTask($updatedTask);
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $updatedTask = [
-        "id" => $_POST['taskId'],
+        "id" => intval($_POST['taskId']),
         "title" => $_POST['title'],
         "creationDate" => $_POST['creationDate'],
         "deadline" => $_POST['deadline'],
         "status" => $_POST['status'],
     ];
+    updateTask($updatedTask);
     header('Location: /todolist/index.php');
     exit();
 }
 
 $taskId = $_GET['taskId'];
-$db = connectDB("./data.db");
-$stmt = $db->prepare('SELECT * FROM tasks WHERE id = :id');
-$stmt->bindValue(':id', $taskId, SQLITE3_INTEGER);
-$result = $stmt->execute();
-$task = $result->fetchArray(SQLITE3_ASSOC);
-$db->close();
+$repository = new TaskRepository();
+$task = $repository->getById(intval($taskId));
 
 if (!$task) {
     header('Location: /todolist/index.php');

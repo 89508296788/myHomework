@@ -1,5 +1,13 @@
 <?php
-include 'db.php';
+include_once './db/taskRepository.php';
+
+$repository = new TaskRepository();
+
+function deleteTask(int $taskId): void
+{
+    global $repository;
+    $repository->deleteTask($taskId);
+}
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_REQUEST['taskId'])) {
     $taskId = intval($_REQUEST['taskId']);
@@ -7,4 +15,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_REQUEST['taskId'])) {
     echo 'success';
     exit;
 }
-?>
