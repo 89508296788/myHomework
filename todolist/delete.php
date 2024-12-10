@@ -1,12 +1,17 @@
 <?php
 include './db/taskRepository.php';
 
-// Используем Singleton для получения экземпляра TaskRepository
-$repository = TaskRepository::getInstance();
+$repository = new TaskRepository();
+
+function deleteTask(int $taskId): void
+{
+    global $repository;
+    $repository->deleteTask($taskId);
+}
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_REQUEST['taskId'])) {
     $taskId = intval($_REQUEST['taskId']);
-    $repository->deleteTask($taskId);
+    deleteTask($taskId);
     echo 'success';
     exit;
 }

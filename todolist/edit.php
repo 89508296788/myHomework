@@ -3,7 +3,7 @@ require_once './db/taskRepository.php';
 
 function update(array $updatedTask): void
 {
-    $repository = TaskRepository::getInstance();
+    $repository = new TaskRepository();
     $repository->updateTask($updatedTask);
 }
 
@@ -21,12 +21,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 $taskId = $_GET['taskId'];
-$repository = TaskRepository::getInstance(); // Используем Singleton
+$repository = new TaskRepository();
 $task = $repository->getById(intval($taskId));
-
-// Проверяем, существует ли задача
+// не FALSE = TRUE если поставили восклицательный знак.
 if (!$task) {
-    header('Location: /todolist/index.php'); // Переадресация на главную страницу
+    header('Location: /todolist/index.php');// Переадресация на другую страницу.
     exit();
 }
 ?>

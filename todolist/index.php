@@ -1,8 +1,8 @@
 <?php
-require_once './db/connection.php';
-require_once './db/taskRepository.php';
 
-$repository = TaskRepository::getInstance();
+include './db/taskRepository.php';
+
+$repository = new TaskRepository();
 $tasks = $repository->getAllTasks();
 ?>
 <!DOCTYPE html>
