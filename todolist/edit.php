@@ -1,9 +1,9 @@
 <?php
 require_once './db/taskRepository.php';
 
-function updateTask(array $updatedTask): void
+function update(array $updatedTask): void
 {
-    $repository = new TaskRepository();
+    $repository = TaskRepository::getInstance();
     $repository->updateTask($updatedTask);
 }
 
@@ -15,17 +15,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         "deadline" => $_POST['deadline'],
         "status" => $_POST['status'],
     ];
-    updateTask($updatedTask);
+    update($updatedTask);
     header('Location: /todolist/index.php');
     exit();
 }
 
 $taskId = $_GET['taskId'];
-$repository = new TaskRepository();
+$repository = TaskRepository::getInstance(); // Используем Singleton
 $task = $repository->getById(intval($taskId));
 
+// Проверяем, существует ли задача
 if (!$task) {
-    header('Location: /todolist/index.php');
+    header('Location: /todolist/index.php'); // Переадресация на главную страницу
     exit();
 }
 ?>

@@ -1,10 +1,9 @@
 <?php
-
 include_once './db/taskRepository.php';
 
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $repository = new TaskRepository();
+    // Используем Singleton для получения экземпляра TaskRepository
+    $repository = TaskRepository::getInstance();
 
     $newTask = [
         "title" => $_POST['title'],

@@ -23,17 +23,3 @@ function saveTask(array $task): void
     file_put_contents('./db.json',  $encodedTasks);// снова сохраняем файл
     
 }
-
-
-$newTask = [  "number"=> getLastTaskId()+1,
-        "title"=> $_POST['title'],
-        "creationDate"=> $_POST['creationDate'],
-        "deadline"=> $_POST['deadline'],
-        "status" => $_POST['status'],
-];
-
-saveTask($newTask);
-
-header('Location: http://localhost:8081/todolist/index.php');
-
-// сделать функционал редактирования задач
