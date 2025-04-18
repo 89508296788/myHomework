@@ -18,3 +18,8 @@ $array = [56, 101, 57, 89, 75];
 
 echo getLargestElementFromArray($array);
 
+function sum($a, $b) {
+    return $a + $b;
+}
+
+echo sum(5, 3); // Выведет 8
