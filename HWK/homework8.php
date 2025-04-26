@@ -2,39 +2,62 @@
 
 class Worker 
 {
-    private $name;
-    private $age;
-    private $salary;
+    private string $name;
+    private int $age;
+    private int $salary;
 
-    public function setName(){
-
+    private function checkAge(int $age): bool {
+        return $age >= 1 && $age <= 100;
     }
 
-    public function getName(){
-
+    public function setName(string $name): void {
+        $this->name = $name;
     }
 
-    public function setAge(){
-
+    public function setAge(int $age): bool {
+        if ($this->checkAge($age)) {
+            $this->age = $age;
+            return true;
+        }
+        return false;
+    }
+    
+    public function setSalary(int $salary): void {
+        $this->salary = $salary;
     }
 
-    public function getAge(){
-
+    public function getName(): string {
+        return $this->name;
     }
 
-    public function setSalary(){
-
+    public function getAge(): int {
+        return $this->age;
     }
 
-    public function getSalary(){
-
+    public function getSalary(): int {
+        return $this->salary;
     }
-
-    private function checkAge(){
-
-    }
-
 }
+
+$worker1 = new Worker();
+$worker1->setName('Иван');
+$worker1->setAge(25); 
+$worker1->setSalary(1000);
+
+$worker2 = new Worker();
+$worker2->setName('Вася');
+$worker2->setAge(26);
+$worker2->setSalary(2000);
+
+function printWorkerInfo(Worker $worker): void {
+    echo $worker->getName() . ', ' . $worker->getAge() . ' лет<br>'; 
+}
+
+echo 'Сумма зарплат: ' . ($worker1->getSalary() + $worker2->getSalary()) . '<br>';
+echo 'Сумма возрастов: ' . ($worker1->getAge() + $worker2->getAge()) . '<br>';
+
+printWorkerInfo($worker1);
+printWorkerInfo($worker2);
 
 /*И вот отдельно задача Создать класс Worker, 
 в котором будут следующие private поля - name (имя), 
@@ -47,6 +70,5 @@ getName, setAge, getAge, setSalary, getSalary.
 Создайте 2 объекта этого класса: 'Иван', возраст 25, зарплата 1000 и 'Вася', возраст 26, зарплата 2000.
 Выведите на экран сумму зарплат Ивана и Васи. Выведите на экран сумму возрастов Ивана и Васи.
 Напишите функцию которая быдет выводить Имя и возраст. Вызовите ее для этих обьектов.*/
-
 
 ?>
