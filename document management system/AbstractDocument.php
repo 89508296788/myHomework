@@ -1,16 +1,14 @@
 <?php
 
 abstract class AbstractDocument implements DocumentInterface
-
 {
-
     protected string $content;
-    private DateTimeImmutable $createdAT;
+    private DateTimeImmutable $createdAt;
 
     public function __construct(string $content)
     {
         $this->content = $content;
-        $this->createdAT = new DateTimeImmutable();
+        $this->createdAt = new DateTimeImmutable();
         $this->processContent();
     }
 
@@ -25,7 +23,7 @@ abstract class AbstractDocument implements DocumentInterface
     {
         return [
             'created_at' => $this->createdAt->format('Y-m-d H:i:s'),
-            'timestamp' =>$this->createdAt->getTimestamp(),
+            'timestamp' => $this->createdAt->getTimestamp(),
         ];
     }
 
@@ -33,10 +31,8 @@ abstract class AbstractDocument implements DocumentInterface
     {
         $data = [
             'content' => $this->getContent(),
-            'metadata' => $this->getMetadata(),
+            'metadata' => $this->getMetaData(),
         ];
         return json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
-    
     }
-    
 }

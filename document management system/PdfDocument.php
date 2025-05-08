@@ -7,14 +7,9 @@ class PdfDocument extends AbstractDocument
     protected function processContent(): void
     {
         $this->log("Обработка PDF документа");
-        $this->content = "PDF_CONTENT': " . $this->content;
+        $this->content = "PDF_СОДЕРЖИМОЕ: " . $this->content;
         $this->log("PDF обработан");
     }
-
-    /**
-     * Возвращает случайное количество страниц (заглушка)
-     * @return int
-     */
 
     public function getPageCount(): int
     {

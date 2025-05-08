@@ -6,13 +6,13 @@ trait LoggableTrait
 
     protected function log(string $message): void
     {
-        $logEntry = "[LOG]: " . $message;
+        $logEntry = "[ЛОГ]: " . $message;
         $this->logs[] = $logEntry;
         echo $logEntry . PHP_EOL;
     }
 
-    public function getLogs(): array{
-        
+    public function getLogs(): array
+    {
         return $this->logs;
     }
 }
