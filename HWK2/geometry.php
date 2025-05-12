@@ -13,50 +13,40 @@
 Площадь прямоугольника: 24
 */
 
-interface IShape
-{
-    public function calculateArea();
+interface IShape {
+    public function calculateArea(): float;
+    public function displayInfo(): string;
 }
 
-class Circle
-{
-    public function __construct(private int $radius = 0)
-    {
-        
-    }
-
-    public function calculateArea()
-    {
-
-    }
-
-    public function displayInfo()
-    {
-        return 'Площадь круга 78.54';
-    }
-}
-
-Class Rectangle
-{
+class Circle implements IShape {
+    public function __construct(private float $radius) {}
     
-public function __construct(int $width = 0, int $height = 0) 
-    {
-   
+    public function calculateArea(): float {
+        return M_PI * pow($this->radius, 2);
     }
-
-    public function calculateArea()
-    {
-        
-    }
-
-    public function displayInfo()
-    {
-        return 'Площадь прямоугольника: 24';
+    
+    public function displayInfo(): string {
+        return "Площадь круга: " . round($this->calculateArea(), 2);
     }
 }
 
-$circle = new Circle();
-$rectangle = new Rectangle();
+class Rectangle implements IShape {
+    public function __construct(
+        private float $width, 
+        private float $height
+    ) {}
+    
+    public function calculateArea(): float {
+        return $this->width * $this->height;
+    }
+    
+    public function displayInfo(): string {
+        return "Площадь прямоугольника: " . $this->calculateArea();
+    }
+}
+
+$circle = new Circle(5); // Радиус 5 (площадь ~78.54)
+$rectangle = new Rectangle(6, 4); // Ширина 6, высота 4 (площадь 24)
 
 echo $circle->displayInfo() . "<br>";
 echo $rectangle->displayInfo();
