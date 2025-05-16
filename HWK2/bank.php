@@ -25,7 +25,7 @@ class BankAccount
         return "Баланс {$this->ownerName}: {$this->balance}";
     }
 
-    public function withdraw(int $amount): string 
+    public function withDraw(int $amount): string 
     {
         $this->balance -= $amount;
         return "После снятия: {$this->balance}";
