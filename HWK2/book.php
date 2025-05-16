@@ -26,7 +26,7 @@ class Book
 
     public function displayInfo(): string
     {
-
+        return "";
     }
 
 }
