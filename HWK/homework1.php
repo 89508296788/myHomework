@@ -91,4 +91,172 @@ Premium-пользователь Kate: 50 друзей (пост закрепл�
 Пример вывода:
 Автобус №101 объявляет остановку "Центральная площадь"
 Метро: следующая станция "Вокзальная" (оплатите проезд)
+
+Задача 1: Погодные явления
+
+    Создайте интерфейс WeatherEvent с методами:
+
+        describe(): string — возвращает описание явления.
+
+        getImpact(): string — возвращает воздействие на окружающую среду.
+
+    Реализуйте интерфейс в классах:
+
+        Rain (свойство: intensity),
+
+        Snow (свойство: snowfallDepth),
+
+        Sunny (свойство: brightness).
+
+    Создайте массив объектов этих классов и используйте foreach, чтобы вывести информацию о каждом явлении.
+
+Задача 2: Электронные устройства
+
+    Создайте абстрактный класс ElectronicDevice с:
+
+        Защищёнными свойствами: brand, powerConsumption.
+
+        Абстрактным методом turnOn(): string.
+
+    Интерфейс Chargeable с методом charge(): string.
+
+    Классы:
+
+        Smartphone (реализует Chargeable),
+
+        Laptop (реализует Chargeable).
+
+    Через foreach выведите статус включения и зарядки для каждого устройства.
+
+Задача 3: Ученики и оценки
+
+    Класс Student с:
+
+        Приватными свойствами: name, grades (массив оценок).
+
+        Методами:
+
+            addGrade(int $grade): void,
+
+            calculateAverage(): float,
+
+            displayInfo(): string.
+
+    Класс HonorStudent (наследует Student) с методом getScholarshipStatus(): string.
+
+    Создайте массив студентов и через foreach выведите их средний балл и статус стипендии (если есть).
+
+Задача 4: Спортивные команды
+
+    Базовый класс SportsTeam с свойством teamName.
+
+    Интерфейс ITeam с методами:
+
+        train(): string,
+
+        playMatch(): string.
+
+    Классы:
+
+        FootballTeam (доп. свойства: playersCount = 11, captain),
+
+        BasketballTeam (доп. свойства: playersCount = 5, captain).
+
+    Через foreach выведите информацию о тренировках или матчах команд.
+
+Задача 5: Геометрические фигуры
+
+    Интерфейс Shape с методами:
+
+        area(): float,
+
+        perimeter(): float.
+
+    Классы:
+
+        Circle (свойство: radius),
+
+        Square (свойство: sideLength),
+
+        Rectangle (свойства: width, height).
+
+    Используйте foreach, чтобы вычислить и вывести площадь и периметр каждой фигуры.
+
+Задача 6: Животные в зоопарке
+
+    Абстрактный класс Animal с методом makeSound(): string.
+
+    Классы:
+
+        Tiger (реализует рычание),
+
+        Penguin (реализует звук пингвина),
+
+        Elephant (реализует звук слона).
+
+    Создайте массив животных и через foreach выведите их звуки.
+
+Задача 7: Транспортные средства
+
+    Абстрактный класс Vehicle с:
+
+        Свойствами: model, maxSpeed.
+
+        Абстрактным методом getInfo(): string.
+
+    Классы:
+
+        Car (доп. свойство: fuelType),
+
+        Bicycle (доп. свойство: hasBell).
+
+    Через foreach выведите информацию о каждом транспортном средстве.
+
+Задача 8: Банковские счета
+
+    Класс BankAccount с:
+
+        Приватными свойствами: ownerName, balance.
+
+        Методами:
+
+            deposit(float $amount): void,
+
+            withdraw(float $amount): void,
+
+            getBalance(): float.
+
+    Класс SavingsAccount (наследует BankAccount) с методом addInterest(): void.
+
+    Создайте массив счетов и через foreach пополните/снимите средства, затем выведите баланс.
+
+Задача 9: Продукты в магазине
+
+    Интерфейс Product с методами:
+
+        getName(): string,
+
+        getPrice(): float,
+
+        getDiscountPrice(): float.
+
+    Классы:
+
+        Book (свойства: title, author, price),
+
+        Fruit (свойства: name, price, isSeasonal).
+
+    Через foreach выведите информацию о продуктах, включая цену со скидкой (если есть).
+
+Задача 10: Фильмы и актёры
+
+    Класс Movie с:
+
+        Свойствами: title, year, actors (массив строк).
+
+        Методом addActor(string $actor): void.
+
+    Класс Cinema с методом playMovie(Movie $movie): string.
+
+    Создайте несколько фильмов, добавьте актёров и через foreach выведите информацию о каждом фильме.
 */
