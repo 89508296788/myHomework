@@ -6,7 +6,7 @@ $shoppingList = [
     'Яйца'
 ];
 
-var_dump ($shoppingList) ;
+echo ($shoppingList) ;
 
 // * Добавляет новый товар в список (например, "Масло").
 $shoppingList = [
@@ -16,7 +16,7 @@ $shoppingList = [
     'Масло'
 ];
 
-var_dump ($shoppingList) ;
+echo ($shoppingList) ;
 
 // * Удаляет товар из списка (например, "Хлеб").
 $shoppingList = [

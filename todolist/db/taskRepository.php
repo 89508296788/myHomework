@@ -21,12 +21,19 @@ class TaskRepository
     public function addTask($task): void
     {
         $db = DatabaseConnection::getInstance("./data.db");
-        $stmt = $db->prepare('INSERT INTO tasks (title, creationDate, deadline, status) VALUES (:title, :creationDate, :deadline, :status)');
-        $stmt->bindValue(':title', $task['title'], SQLITE3_TEXT);
-        $stmt->bindValue(':creationDate', $task['creationDate'], SQLITE3_TEXT);
-        $stmt->bindValue(':deadline', $task['deadline'], SQLITE3_TEXT);
-        $stmt->bindValue(':status', $task['status'], SQLITE3_TEXT);
-        $stmt->execute();
+        $db->exec('BEGIN TRANSACTION');
+        try {
+            $stmt = $db->prepare('INSERT INTO tasks (title, creationDate, deadline, status) VALUES (:title, :creationDate, :deadline, :status)');
+            $stmt->bindValue(':title', $task['title'], SQLITE3_TEXT);
+            $stmt->bindValue(':creationDate', $task['creationDate'], SQLITE3_TEXT);
+            $stmt->bindValue(':deadline', $task['deadline'], SQLITE3_TEXT);
+            $stmt->bindValue(':status', $task['status'], SQLITE3_TEXT);
+            $stmt->execute();
+            $db->exec('COMMIT');
+        } catch (Exception $e) {
+            $db->exec('ROLLBACK');
+            throw $e;
+        }
     }
 
     public function updateTask(array $task): void
