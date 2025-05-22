@@ -69,9 +69,14 @@ class Sunny
     }
 }
 
-$weatherevent = [new Rain(), new Snow(), new Sunny()];
-foreach ($weatherevent as $weather)
-{
-    echo $weather->describe() . "<br>";
-    echo $weather->getImpact() . "<br>";
+/**
+ * Массив погодных событий
+ * @var WeatherEventInterface[] $weatherEvents
+ * Переименовал массив элементов в $event так как порекомендовали в forreach использовать единственное число   
+ */
+$weatherEvents = [new Rain(), new Snow(), new Sunny()];
+
+foreach ($weatherEvents as $event) {
+    echo $event->describe() . "<br>";
+    echo $event->getImpact() . "<br>";
 }

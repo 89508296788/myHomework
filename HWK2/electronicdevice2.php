@@ -42,7 +42,7 @@ abstract class ElectronicDevice
     abstract function turnOn(): string;
 }
 
-class Smartphone 
+class Smartphone implements Chargeable
 {
 
     public function __construct(protected string $brand = "Samsung", protected string $powerConsumption = '10Вт')
@@ -64,7 +64,7 @@ class Smartphone
     /**
     * ноутбук
     */
-class LapTop
+class LapTop implements Chargeable
 {
     public function __construct(protected string $brand = "Lenovo", protected string $powerConsumption = '60Вт')
     {

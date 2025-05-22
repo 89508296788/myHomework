@@ -10,10 +10,13 @@ interface IPet {
     public function play(): string;
 }
 
-abstract class Animal {
+class Animal {
     public function __construct(protected string $name) {}
     
-    abstract public function makeSound(): string;
+    public function makeSound(): string
+    {
+        return "Животное {$this->name} издает звук";
+    }
 }
 
 class Dog extends Animal implements IPet {
